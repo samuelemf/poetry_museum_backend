@@ -15,8 +15,3 @@ public class CreateUserImpl implements CreateUserService {
         return user;
     }
 }
-
-//interfaz en app
-// detntro de aapp interaf
-// con email / base de datos
-// Spring data viola
