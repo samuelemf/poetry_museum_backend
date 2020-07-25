@@ -1,4 +1,4 @@
-package com.platanerosesc.poetry_museum.application.user;
+package com.platanerosesc.poetry_museum.application.user.create;
 
 import com.platanerosesc.poetry_museum.domain.user.User;
 
