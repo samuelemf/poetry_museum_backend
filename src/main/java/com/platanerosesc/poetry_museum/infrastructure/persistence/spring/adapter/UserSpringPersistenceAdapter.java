@@ -7,7 +7,9 @@ import com.platanerosesc.poetry_museum.infrastructure.persistence.spring.entity.
 import com.platanerosesc.poetry_museum.infrastructure.persistence.spring.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class UserSpringPersistenceAdapter implements UserPersistencePort {
 
@@ -26,20 +28,27 @@ public class UserSpringPersistenceAdapter implements UserPersistencePort {
 
     @Override
     public List<User> index() {
-        return null;
+        List<User> usersList = new ArrayList<>();
+        userRepository.findAll().forEach(userEntity -> {
+            User currentUser = new User();
+            BeanUtils.copyProperties(userEntity, currentUser);
+            usersList.add(currentUser);
+        });
+        return usersList;
     }
 
     @Override
     public void delete(User user) {
-
+        UserEntity userEntity = new UserEntity();
+        BeanUtils.copyProperties(user, userEntity);
+        userRepository.delete(userEntity);
     }
 
     @Override
     public User get(int userId) {
         UserEntity userEntity = userRepository.findById(userId).orElse(null);
         if(userEntity == null)
-            System.out.println("not found"); //TODO add error validation
-        assert userEntity != null;
+            throw new NoSuchElementException("User not found.");
 
         User foundUser = new User();
         BeanUtils.copyProperties(userEntity, foundUser);
