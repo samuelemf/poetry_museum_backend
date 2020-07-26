@@ -11,14 +11,6 @@ public class User {
     private String email;
     private LocalDate createdDate;
 
-    public User(){}
-
-    public User(String username, String role, String email){
-        setUsername(username);
-        setRole(role);
-        setEmail(email);
-    }
-
     public int getId() {
         return id;
     }

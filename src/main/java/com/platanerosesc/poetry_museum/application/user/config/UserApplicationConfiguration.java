@@ -9,21 +9,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ApplicationConfiguration {
+public class UserApplicationConfiguration {
 
     @Bean
-    public CreateUserImpl getCreateUser(UserPersistencePort userPersistencePort){
+    public CreateUserImpl createUserService(UserPersistencePort userPersistencePort){
         return new CreateUserImpl(userPersistencePort);
-    }
-
-    @Bean
-    public GetUserImpl getUserService(UserPersistencePort userPersistencePort){
-        return new GetUserImpl(userPersistencePort);
     }
 
     @Bean
     public DeleteUserImpl deleteUserService(UserPersistencePort userPersistencePort){
         return new DeleteUserImpl(userPersistencePort);
+    }
+
+    @Bean
+    public GetUserImpl getUserService(UserPersistencePort userPersistencePort){
+        return new GetUserImpl(userPersistencePort);
     }
 
     @Bean

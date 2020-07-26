@@ -23,18 +23,9 @@ public class UserController {
     private @Autowired IndexUserService indexUserService;
 
     @PostMapping
-    public ResponseEntity<Void> add(@RequestBody User user){
+    public ResponseEntity<Void> create(@RequestBody User user){
         createUserService.execute(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<User> get(@PathVariable int id){
-        try {
-            return new ResponseEntity<User>(getUserService.execute(id), HttpStatus.FOUND);
-        } catch (NoSuchElementException ex){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     @DeleteMapping(path = "/{id}")
@@ -43,8 +34,18 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<User> get(@PathVariable int id){
+        try {
+            return new ResponseEntity<>(getUserService.execute(id), HttpStatus.FOUND);
+        } catch (NoSuchElementException ex){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping
     public ResponseEntity<List<User>> index(){
-        return new ResponseEntity<List<User>>(indexUserService.execute(), HttpStatus.OK);
+        return new ResponseEntity<>(indexUserService.execute(), HttpStatus.OK);
     }
 }

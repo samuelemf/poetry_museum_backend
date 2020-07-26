@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class UserMemoryPersistenceAdapter implements UserPersistencePort {
 
-    private static final Map<Integer, User> userMap = new HashMap<Integer, User>();
+    private static final Map<Integer, User> userMap = new HashMap<>();
 
     @Override
     public void add(User user) {

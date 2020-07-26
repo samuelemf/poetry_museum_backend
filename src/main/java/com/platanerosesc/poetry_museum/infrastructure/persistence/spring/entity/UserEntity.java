@@ -6,11 +6,11 @@ import java.time.LocalDate;
 @Entity
 @Table(name="POET")
 public class UserEntity {
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column int id;
-    private @Column String username;
-    private @Column String role;
-    private @Column String email;
-    private @Column LocalDate createdDate;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) int id;
+    private String username;
+    private String role;
+    private String email;
+    private LocalDate createdDate;
 
     public int getId() {
         return id;
