@@ -29,7 +29,7 @@ public class UserSpringPersistenceAdapter implements UserPersistencePort {
     }
 
     @Override
-    public List<User> index() {
+    public List<User> getAllUsers() {
         List<User> usersList = new ArrayList<>();
         userRepository.findAll().forEach(userEntity -> {
             User currentUser = new User();
