@@ -18,6 +18,6 @@ public class GetAllUsersService {
     }
 
     public List<User> execute() {
-        return userPersistencePort.index();
+        return userPersistencePort.getAllUsers();
     }
 }
