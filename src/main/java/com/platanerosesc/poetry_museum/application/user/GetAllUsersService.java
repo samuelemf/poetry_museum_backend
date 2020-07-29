@@ -1,20 +1,23 @@
-package com.platanerosesc.poetry_museum.application.user.get;
+package com.platanerosesc.poetry_museum.application.user;
 
 import com.platanerosesc.poetry_museum.domain.user.User;
 import com.platanerosesc.poetry_museum.domain.user.port.UserPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class GetUserImpl implements GetUserService {
+import java.util.List;
+
+@Service
+public class GetAllUsersService {
 
     private final UserPersistencePort userPersistencePort;
 
     @Autowired
-    public GetUserImpl(UserPersistencePort userPersistencePort){
+    public GetAllUsersService(UserPersistencePort userPersistencePort) {
         this.userPersistencePort = userPersistencePort;
     }
 
-    @Override
-    public User execute(int userId) {
-        return userPersistencePort.get(userId);
+    public List<User> execute() {
+        return userPersistencePort.index();
     }
 }

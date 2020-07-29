@@ -1,17 +1,18 @@
-package com.platanerosesc.poetry_museum.infrastructure.persistence.spring.adapter;
+package com.platanerosesc.poetry_museum.infrastructure.persistence.adapter;
 
 import com.platanerosesc.poetry_museum.domain.poem.Poem;
 import com.platanerosesc.poetry_museum.domain.poem.port.PoemPersistencePort;
 import com.platanerosesc.poetry_museum.domain.user.User;
-import com.platanerosesc.poetry_museum.infrastructure.persistence.spring.entity.PoemEntity;
-import com.platanerosesc.poetry_museum.infrastructure.persistence.spring.entity.UserEntity;
-import com.platanerosesc.poetry_museum.infrastructure.persistence.spring.repository.PoemRepository;
+import com.platanerosesc.poetry_museum.infrastructure.persistence.entity.PoemEntity;
+import com.platanerosesc.poetry_museum.infrastructure.persistence.entity.UserEntity;
+import com.platanerosesc.poetry_museum.infrastructure.persistence.repository.PoemRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
+@Component
 public class PoemSpringPersistenceAdapter implements PoemPersistencePort {
 
     private final PoemRepository poemRepository;
@@ -26,26 +27,21 @@ public class PoemSpringPersistenceAdapter implements PoemPersistencePort {
     }
 
     @Override
-    public List<Poem> index() {
-        List<Poem> poemList = new ArrayList<>();
-        poemRepository.findAll().forEach(poemEntity -> {
-            poemList.add(convertEntityToPoem(poemEntity));
-        });
-        return poemList;
-    }
-
-    @Override
-    public void delete(Poem poem) {
-        poemRepository.delete(convertPoemToEntity(poem));
+    public void delete(long id) {
+        poemRepository.deleteById(id);
     }
 
     @Override
     public Poem get(long id) {
-        PoemEntity poemEntity = poemRepository.findById(id).orElse(null);
-        if(poemEntity == null)
-            throw new NoSuchElementException("User not found.");
-
+        PoemEntity poemEntity = poemRepository.findById(id).orElseThrow();
         return convertEntityToPoem(poemEntity);
+    }
+
+    @Override
+    public List<Poem> getAllPoems() {
+        List<Poem> poemList = new ArrayList<>();
+        poemRepository.findAll().forEach(poemEntity -> poemList.add(convertEntityToPoem(poemEntity)));
+        return poemList;
     }
 
     private PoemEntity convertPoemToEntity(Poem poem){

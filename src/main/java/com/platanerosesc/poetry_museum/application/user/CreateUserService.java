@@ -1,17 +1,19 @@
-package com.platanerosesc.poetry_museum.application.user.create;
+package com.platanerosesc.poetry_museum.application.user;
 
 import com.platanerosesc.poetry_museum.domain.user.User;
 import com.platanerosesc.poetry_museum.domain.user.port.UserPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-public class CreateUserImpl implements CreateUserService {
+@Service
+public class CreateUserService {
 
     private final UserPersistencePort userPersistencePort;
 
     @Autowired
-    public CreateUserImpl(UserPersistencePort userPersistencePort){
+    public CreateUserService(UserPersistencePort userPersistencePort){
         this.userPersistencePort = userPersistencePort;
     }
 

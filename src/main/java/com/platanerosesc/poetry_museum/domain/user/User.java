@@ -7,7 +7,6 @@ public class User {
 
     private int id;
     private String username;
-    private String role;
     private String email;
     private LocalDate createdDate;
 
@@ -25,14 +24,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getEmail() {
@@ -58,13 +49,12 @@ public class User {
         User user = (User) o;
         return getId() == user.getId() &&
                 Objects.equals(getUsername(), user.getUsername()) &&
-                Objects.equals(getRole(), user.getRole()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&
                 Objects.equals(getCreatedDate(), user.getCreatedDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUsername(), getRole(), getEmail(), getCreatedDate());
+        return Objects.hash(getId(), getUsername(), getEmail(), getCreatedDate());
     }
 }

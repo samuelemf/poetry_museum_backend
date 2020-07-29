@@ -8,9 +8,9 @@ public interface PoemPersistencePort {
 
     void add(Poem poem);
 
-    List<Poem> index();
+    List<Poem> getAllPoems();
 
-    void delete(Poem poem);
+    void delete(long id);
 
-    Poem get(long userId);
+    Poem get(long id);
 }

@@ -1,4 +1,4 @@
-package com.platanerosesc.poetry_museum.infrastructure.persistence.spring.entity;
+package com.platanerosesc.poetry_museum.infrastructure.persistence.entity;
 
 import javax.persistence.*;
 import java.time.LocalTime;
