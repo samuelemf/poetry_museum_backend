@@ -2,9 +2,11 @@ package com.platanerosesc.poetry_museum.infrastructure.rest.server;
 
 import com.platanerosesc.poetry_museum.application.user.*;
 import com.platanerosesc.poetry_museum.domain.user.User;
+import com.platanerosesc.poetry_museum.infrastructure.persistence.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,12 +30,14 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
-    public User get(@PathVariable int id){
-        return getUserService.execute(id);
+    public UserDTO get(@PathVariable int id){
+        return new UserDTO(getUserService.execute(id));
     }
 
     @GetMapping
-    public List<User> getAllUsers(){
-        return getAllUsersService.execute();
+    public List<UserDTO> getAllUsers(){
+        List<UserDTO> listOfUsers = new ArrayList<>();
+        getAllUsersService.execute().forEach(user -> listOfUsers.add(new UserDTO(user)));
+        return listOfUsers;
     }
 }

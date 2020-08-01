@@ -8,10 +8,10 @@ public interface UserPersistencePort {
 
     void add(User user);
 
-    List<User> getAllUsers();
-
     void delete(int id);
 
     User get(int id);
+
+    List<User> getAllUsers();
 
 }

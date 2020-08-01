@@ -5,9 +5,11 @@ import com.platanerosesc.poetry_museum.application.poem.DeletePoemService;
 import com.platanerosesc.poetry_museum.application.poem.GetPoemService;
 import com.platanerosesc.poetry_museum.application.poem.GetAllPoemsService;
 import com.platanerosesc.poetry_museum.domain.poem.Poem;
+import com.platanerosesc.poetry_museum.infrastructure.persistence.dto.PoemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,12 +32,14 @@ public class PoemController {
     }
 
     @GetMapping(path = "/{id}")
-    public Poem get(@PathVariable long id){
-        return getPoemService.execute(id);
+    public PoemDTO get(@PathVariable long id){
+        return new PoemDTO(getPoemService.execute(id));
     }
 
     @GetMapping
-    public List<Poem> getAllPoems(){
-        return getAllPoemsService.execute();
+    public List<PoemDTO> getAllPoems(){
+        List<PoemDTO> listOfPoems = new ArrayList<>();
+        getAllPoemsService.execute().forEach(poem -> listOfPoems.add(new PoemDTO(poem)));
+        return listOfPoems;
     }
 }
